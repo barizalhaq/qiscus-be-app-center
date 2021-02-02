@@ -35,14 +35,20 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'trestle'
-gem 'trestle-auth-otp'
+
+# dashboard
+gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+
+gem 'devise'
 
 # service
 gem "http", require: false
 # async
 gem 'delayed_job_active_record'
 gem "daemons"
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
