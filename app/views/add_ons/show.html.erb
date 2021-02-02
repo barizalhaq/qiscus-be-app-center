@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @add_on.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @add_on.description %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @add_on.author %>
+</p>
+
+<p>
+  <strong>Contact email:</strong>
+  <%= @add_on.contact_email %>
+</p>
+
+<%= link_to 'Edit', edit_add_on_path(@add_on) %> |
+<%= link_to 'Back', add_ons_path %>
