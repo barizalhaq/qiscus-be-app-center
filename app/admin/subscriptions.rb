@@ -1,5 +1,5 @@
 ActiveAdmin.register Subscription do
-
+  menu priority: 4
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -15,4 +15,8 @@ ActiveAdmin.register Subscription do
   #   permitted
   # end
   
+  sidebar "Subsription" do
+    render('/admin/sidebar_links', :model => 'subscriptions')
+  end
+
 end
