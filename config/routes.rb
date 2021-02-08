@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :request_demos
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :subscriptions
@@ -11,7 +12,11 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      resources :add_on, controller: 'add_on_api', only: [:index, :show]
+      
+      get 'add_on', to: 'add_on_api#index'
+      get 'add_on/:id', to: 'add_on_api#show'
+      post 'add_on/:id/install', to: 'add_on_api#install'
+  
     end
   end
 end

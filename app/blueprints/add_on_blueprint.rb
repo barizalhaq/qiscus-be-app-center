@@ -1,3 +1,4 @@
 class AddOnBlueprint < Blueprinter::Base
-    fields :name
+    identifier :id
+    fields :contact_email, :author, :description, :name
 end

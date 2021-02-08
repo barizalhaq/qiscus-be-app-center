@@ -47,6 +47,8 @@ gem "http", require: false
 # async
 gem 'delayed_job_active_record'
 gem "daemons"
+gem 'cloudinary'
+gem 'carrierwave', '~> 2.0'
 
 # api formater
 gem 'blueprinter'

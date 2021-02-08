@@ -1,0 +1,37 @@
+<%= form_with(model: request_demo, local: true) do |form| %>
+  <% if request_demo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(request_demo.errors.count, "error") %> prohibited this request_demo from being saved:</h2>
+
+      <ul>
+      <% request_demo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :app_id %>
+    <%= form.text_field :app_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :add_on_id %>
+    <%= form.text_field :add_on_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_email %>
+    <%= form.text_field :contact_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_phone %>
+    <%= form.text_field :contact_phone %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
