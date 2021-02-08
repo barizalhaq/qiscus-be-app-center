@@ -1,10 +1,12 @@
-class Api::V1::AddOnApiController < ApplicationController
+class Api::V1::AddOnApiController < ApiController
     before_action :set_addon, only: [:show]
 
-    # GET /todos
+    # GET /add_on
     def index
         @addons = AddOn.all
-        json_response(@addons)
+        res = AddOnBlueprint.render_as_json(@addons)
+        json_response(res)
+        # render json: res
     end
     private
     def todo_params
