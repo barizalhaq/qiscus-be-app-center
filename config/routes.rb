@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   root :to => redirect('/admin')
 
   # API
-  mount SwaggerUiEngine::Engine, at: "/api_docs"
+
 
   namespace :api do
     namespace :v1 do
