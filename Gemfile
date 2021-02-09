@@ -49,6 +49,7 @@ gem 'delayed_job_active_record'
 gem "daemons"
 gem 'cloudinary'
 gem 'carrierwave', '~> 2.0'
+gem "active_admin_multi_upload"
 
 # api formater
 gem 'blueprinter'
