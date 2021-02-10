@@ -1,14 +1,5 @@
 class Api::V1::AddOnApiController < ApiController
     before_action :set_addon, only: [:show]
-    
-    # respond_to :json
-
-    swagger_controller :AddOnApi, 'AddOnApi'
-
-    swagger_api :index do
-        summary 'Returns all posts'
-        notes 'Notes...'
-    end
 
     # GET /add_on
     def index

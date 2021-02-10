@@ -53,8 +53,6 @@ gem "active_admin_multi_upload"
 
 # api formater
 gem 'blueprinter'
-gem 'swagger-docs'
-# gem 'swagger_ui_engine'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
