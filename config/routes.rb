@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get 'add_on', to: 'add_on_api#index'
       get 'add_on/:id', to: 'add_on_api#show'
       post 'add_on/:id/install', to: 'add_on_api#install'
-      post 'add_on/:id/request', to: 'add_on_api#request'
+      post 'add_on/:id/contact_us', to: 'add_on_api#contact_us'
     end
   end
 end

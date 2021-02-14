@@ -1,5 +1,5 @@
 class Api::V1::AddOnApiController < ApiController
-    before_action :set_addon, only: [:show]
+    before_action :set_addon, only: [:show, :contact_us, :install]
 
     # GET /add_on
     def index
@@ -11,7 +11,6 @@ class Api::V1::AddOnApiController < ApiController
 
      # GET /add_ons/1 or /add_ons/1.json
     def show
-        byebug
         res = AddOnBlueprint.render_as_json(@addon, root: :add_on)
         json_response(res)
     end
@@ -21,19 +20,18 @@ class Api::V1::AddOnApiController < ApiController
         json_response(res)
     end
 
-    def request
-        # logger.debug demo_params
-        # @req = RequestDemo.new(demo_params)
-        # @req.add_on = @addon
-        # @req.app = App.first
+    def contact_us
+        
+        @demo = RequestDemo.new(name: params[:name], reason: params[:description], contact_email: params[:contact_email], contact_phone: params[:contact_phone])
+        @demo.add_on = @addon
 
-        # if @req.save
-        # # 
-        #     json_response(@req, root: :request_demo)
-        # else
-        # # 
-        #     json_response(nil, :error)
-        # end
+        if @demo.save
+            res = RequestDemoBlueprint.render_as_json(RequestDemo.all, root: :request_demo)
+            json_response(res)
+        else
+            # Fail save
+            byebug
+        end
     end
 
     private
@@ -45,5 +43,4 @@ class Api::V1::AddOnApiController < ApiController
     def set_addon
         @addon = AddOn.find(params[:id])
     end
-
 end
