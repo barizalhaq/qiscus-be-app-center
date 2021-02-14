@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_160750) do
+ActiveRecord::Schema.define(version: 2021_02_14_141600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 2021_02_08_160750) do
     t.string "contact_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "reason"
+    t.integer "status"
+    t.string "name"
     t.index ["add_on_id"], name: "index_request_demos_on_add_on_id"
     t.index ["app_id"], name: "index_request_demos_on_app_id"
   end

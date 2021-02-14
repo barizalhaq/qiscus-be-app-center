@@ -5,7 +5,7 @@ ActiveAdmin.register RequestDemo do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :app_id, :add_on_id, :contact_email, :contact_phone
+  permit_params :app_id, :add_on_id, :contact_email, :contact_phone, :status, :name
   #
   # or
   #
