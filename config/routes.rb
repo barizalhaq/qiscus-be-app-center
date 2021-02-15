@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      post 'login', to: 'auth_api#authenticate'
+
       get 'add_on', to: 'add_on_api#index'
       get 'add_on/:id', to: 'add_on_api#show'
       post 'add_on/:id/install', to: 'add_on_api#install'
