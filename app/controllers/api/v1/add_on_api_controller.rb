@@ -22,11 +22,12 @@ class Api::V1::AddOnApiController < ApiController
 
     def contact_us
         
-        @demo = RequestDemo.new(name: params[:name], reason: params[:description], contact_email: params[:contact_email], contact_phone: params[:contact_phone])
+        @demo = RequestDemo.new(name: params[:name], reason: params[:description], contact_email: params[:contact_email], contact_phone: params[:contact_phone], status: 0)
         @demo.add_on = @addon
-
+        @demo.app = @current_app
+        byebug
         if @demo.save
-            res = RequestDemoBlueprint.render_as_json(RequestDemo.all, root: :request_demo)
+            res = RequestDemoBlueprint.render_as_json(@demo, root: :request_demo)
             json_response(res)
         else
             # Fail save

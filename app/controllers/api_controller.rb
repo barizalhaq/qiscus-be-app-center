@@ -3,12 +3,12 @@ class ApiController < ActionController::API
     include ExceptionHandler
 
     before_action :authenticate_request
-    attr_reader :current_user
+    attr_reader :current_app
 
     private
 
     def authenticate_request
-        @current_user = AuthorizeApiRequest.call(request.headers).result
-        render json: { error: 'Not Authorized' }, status: 401 unless @current_user
+        @current_app = AuthorizeApiRequest.call(request.headers).result
+        render json: { error: 'Not Authorized' }, status: 401 unless @current_app
     end
 end

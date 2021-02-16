@@ -1,5 +1,5 @@
 module JsonWebToken
-  def self.encode(payload, exp = 24.hours.from_now)
+  def self.encode(payload, exp = 1.hours.from_now)
     @key = ENV['API_SECRET_KEY']
     payload[:exp] = exp.to_i
     JWT.encode(payload, @key)
