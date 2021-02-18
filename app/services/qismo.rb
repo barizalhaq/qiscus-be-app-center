@@ -1,0 +1,3 @@
+class Qismo < ApplicationService
+
+end
