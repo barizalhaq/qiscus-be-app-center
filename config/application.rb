@@ -18,6 +18,7 @@ module Marketplace
 
     config.autoload_paths += %W[
       #{config.root}/app/services
+      #{config.root}/app/commands
       #{config.root}/lib
     ]
   end
