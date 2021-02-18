@@ -11,7 +11,7 @@ class Api::V1::AddOnApiController < ApiController
 
      # GET /add_ons/1 or /add_ons/1.json
     def show
-        res = AddOnBlueprint.render_as_json(@addon, root: :add_on)
+        res = AddOnBlueprint.render_as_json(@addon, root: :add_on, view: :detail)
         json_response(res)
     end
 
