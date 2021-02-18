@@ -17,7 +17,6 @@ module Marketplace
     # the framework and any gems in your application.
     config.autoload_paths += %W[
       #{config.root}/app/services
-      #{config.root}/app/commands
     ]
   end
 end
