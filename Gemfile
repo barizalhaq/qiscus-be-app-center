@@ -45,6 +45,8 @@ gem 'jwt'
 
 # service
 gem "http", require: false
+gem 'rack-cors'
+
 # async
 gem 'delayed_job_active_record'
 gem "daemons"
