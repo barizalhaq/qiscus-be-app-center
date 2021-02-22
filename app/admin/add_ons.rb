@@ -5,14 +5,18 @@ ActiveAdmin.register AddOn do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :author, :contact_email
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :description, :author, :contact_email]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params :name, :description, :author, :contact_email, :how_to_install
   
+  # index do
+  #   name :name
+  # end
+
+  form do |f|
+    f.inputs 'Add On' do
+      f.input :name
+      f.input :description, as: :froala_editor
+      f.input :how_to_install, as: :froala_editor
+    end
+    f.actions
+  end
 end

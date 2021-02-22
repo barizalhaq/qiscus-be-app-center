@@ -53,6 +53,7 @@ gem "daemons"
 gem 'cloudinary'
 gem 'carrierwave', '~> 2.0'
 gem "active_admin_multi_upload"
+gem 'activeadmin_froala_editor'
 
 # api formater
 gem 'blueprinter'
