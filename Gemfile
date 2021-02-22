@@ -41,7 +41,7 @@ gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resour
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'active_admin_multi_upload'
 gem 'activeadmin_froala_editor'
-gem 'activeadmin_blaze_theme'
+# gem 'activeadmin_blaze_theme'
 
 gem 'devise'
 gem 'jwt'
