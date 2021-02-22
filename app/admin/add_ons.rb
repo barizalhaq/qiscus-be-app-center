@@ -13,6 +13,7 @@ ActiveAdmin.register AddOn do
     column :caption
     # column :icon
     # default_actions
+    actions
   end
 
   form do |f|
