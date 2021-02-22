@@ -5,11 +5,15 @@ ActiveAdmin.register AddOn do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :author, :contact_email, :how_to_install, :caption
+  permit_params :name, :description, :author, :contact_email, :how_to_install, :caption, :icon, :icon_url
   
-  # index do
-  #   name :name
-  # end
+  index do
+    column :name
+    column :author
+    column :caption
+    column :icon
+    # default_actions
+  end
 
   form do |f|
     f.inputs 'Add On' do
@@ -19,6 +23,7 @@ ActiveAdmin.register AddOn do
       f.input :caption
       f.input :description, as: :froala_editor
       f.input :how_to_install, as: :froala_editor
+      f.input :icon, as: :file
       f.input :icon_url
       # f.input :images
     end

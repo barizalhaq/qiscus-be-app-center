@@ -51,8 +51,6 @@ GEM
     active_admin_multi_upload (0.1.0)
       jquery-fileupload-rails (= 0.4.1)
       rails (>= 4.0.0)
-    activeadmin_blaze_theme (0.6.0)
-      activeadmin (~> 2.0)
     activeadmin_froala_editor (0.2.8)
       activeadmin (~> 2.0)
     activejob (5.2.4.5)
@@ -331,7 +329,6 @@ PLATFORMS
 DEPENDENCIES
   active_admin_multi_upload
   activeadmin!
-  activeadmin_blaze_theme
   activeadmin_froala_editor
   bcrypt (~> 3.1.7)
   blueprinter
