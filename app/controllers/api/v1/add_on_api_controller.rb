@@ -21,7 +21,6 @@ class Api::V1::AddOnApiController < ApiController
     end
 
     def contact_us
-        
         @demo = RequestDemo.new(name: params[:name], reason: params[:description], contact_email: params[:contact_email], contact_phone: params[:contact_phone], status: 0)
         @demo.add_on = @addon
         @demo.app = @current_app
@@ -31,7 +30,7 @@ class Api::V1::AddOnApiController < ApiController
             json_response(res)
         else
             # Fail save
-            byebug
+            json_response({ message: "Failed to request for demo" }, :not_found)
         end
     end
 
