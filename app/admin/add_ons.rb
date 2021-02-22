@@ -21,8 +21,8 @@ ActiveAdmin.register AddOn do
       f.input :author
       f.input :contact_email
       f.input :caption
-      f.input :description, as: :froala_editor
-      f.input :how_to_install, as: :froala_editor
+      f.input :description, as: :quill_editor
+      f.input :how_to_install, as: :quill_editor
       # f.input :icon, as: :file
       f.input :icon_url
       # f.input :images

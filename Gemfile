@@ -40,7 +40,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'active_admin_multi_upload'
-gem 'activeadmin_froala_editor'
+gem 'activeadmin_quill_editor'
 # gem 'activeadmin_blaze_theme'
 
 gem 'devise'
