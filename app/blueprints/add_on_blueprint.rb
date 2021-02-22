@@ -3,6 +3,7 @@ class AddOnBlueprint < Blueprinter::Base
     fields :contact_email, :author, :description, :name, :icon_url
     
     view :detail do
-        fields :how_to_install, :images
+        fields :caption, :how_to_install, :images
     end
+
 end

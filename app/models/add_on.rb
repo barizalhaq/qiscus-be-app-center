@@ -1,9 +1,5 @@
 class AddOn < ApplicationRecord
 
-    def icon_url 
-        'https://img.icons8.com/cotton/64/000000/market--v1.png'
-    end
-
     def images
         return [
             {
