@@ -39,6 +39,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # dashboard
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+gem 'active_admin_multi_upload'
+gem 'activeadmin_froala_editor'
+gem 'activeadmin_blaze_theme'
 
 gem 'devise'
 gem 'jwt'
@@ -52,8 +55,6 @@ gem 'delayed_job_active_record'
 gem "daemons"
 gem 'cloudinary'
 gem 'carrierwave', '~> 2.0'
-gem "active_admin_multi_upload"
-gem 'activeadmin_froala_editor'
 
 # api formater
 gem 'blueprinter'
