@@ -11,7 +11,7 @@ ActiveAdmin.register AddOn do
     column :name
     column :author
     column :caption
-    column :icon
+    # column :icon
     # default_actions
   end
 
@@ -23,7 +23,7 @@ ActiveAdmin.register AddOn do
       f.input :caption
       f.input :description, as: :froala_editor
       f.input :how_to_install, as: :froala_editor
-      f.input :icon, as: :file
+      # f.input :icon, as: :file
       f.input :icon_url
       # f.input :images
     end
