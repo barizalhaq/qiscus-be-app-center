@@ -9,7 +9,7 @@ class AuthenticateUser
   end
 
   def call
-    JsonWebToken::encode(app_code: app.app_code) if app
+    JsonWebToken::encode(app_secret: app.secret) if app
   end
 
   private
@@ -20,8 +20,7 @@ class AuthenticateUser
     app = App.find_by_app_code(app_code)
     return app if app && app.token
     # && user.authenticate(password)
-
-    errors.add :user_authentication, 'invalid credentials'
+    errors.add :message, 'invalid credentials'
     nil
   end
 end

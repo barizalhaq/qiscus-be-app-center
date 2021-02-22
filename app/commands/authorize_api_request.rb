@@ -16,7 +16,7 @@ class AuthorizeApiRequest
   attr_reader :headers
 
   def app
-    @app ||= App.find_by_app_code(decoded_auth_token[:app_code]) if decoded_auth_token
+    @app ||= App.find_by_secret(decoded_auth_token[:app_secret]) if decoded_auth_token
     @app || errors.add(:token, 'Invalid token') && nil
   end
 
