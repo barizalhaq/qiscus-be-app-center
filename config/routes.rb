@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post 'login', to: 'auth_api#authenticate'
 
       get 'add_on', to: 'add_on_api#index'
+      get 'my_add_on', to: 'add_on_api#my_add_on'
       get 'add_on/:id', to: 'add_on_api#show'
       post 'add_on/:id/install', to: 'add_on_api#install'
       post 'add_on/:id/contact_us', to: 'add_on_api#contact_us'

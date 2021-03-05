@@ -50,6 +50,7 @@ gem 'jwt'
 # service
 gem "http", require: false
 gem 'rack-cors'
+gem 'faraday'
 
 # async
 gem 'delayed_job_active_record'

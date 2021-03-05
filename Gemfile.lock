@@ -136,6 +136,11 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.10.0)
     execjs (2.7.0)
+    faraday (1.3.0)
+      faraday-net_http (~> 1.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords
+    faraday-net_http (1.0.1)
     ffi (1.14.2)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -212,6 +217,7 @@ GEM
     mini_portile2 (2.5.0)
     minitest (5.14.3)
     msgpack (1.4.2)
+    multipart-post (2.1.1)
     netrc (0.11.0)
     nio4r (2.5.5)
     nokogiri (1.11.1)
@@ -346,6 +352,7 @@ DEPENDENCIES
   daemons
   delayed_job_active_record
   devise
+  faraday
   figaro (~> 1.2)
   font-awesome-rails
   http
