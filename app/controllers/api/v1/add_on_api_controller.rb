@@ -35,6 +35,8 @@ class Api::V1::AddOnApiController < ApiController
         if @demo.save
             res = RequestDemoBlueprint.render_as_json(@demo, root: :request_demo)
             json_response(res)
+            # Send notification
+            SlackApi.new.notif(@demo)
         else
             # Fail save
             json_response({ message: "Failed to request for demo" }, :not_found)

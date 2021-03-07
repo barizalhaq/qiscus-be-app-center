@@ -39,7 +39,7 @@ class SlackApi
                     "type": "header",
                     "text": {
                         "type": "plain_text",
-                        "text": "Request Add On",
+                        "text": "New Inquiry",
                         "emoji": true
                     }
                 },
@@ -48,11 +48,11 @@ class SlackApi
                     "fields": [
                         {
                             "type": "mrkdwn",
-                            "text": "*Type:*\n#{request_demo.add_on.name}"
+                            "text": "*Add On:*\n#{request_demo.add_on.name}"
                         },
                         {
                             "type": "mrkdwn",
-                            "text": "*Request by:*\n<example.com|#{request_demo.name}>"
+                            "text": "*Request by:*\n<qiscus.com|#{request_demo.name}>"
                         }
                     ]
                 },
@@ -69,7 +69,7 @@ class SlackApi
                     "type": "section",
                     "text": {
                         "type": "plain_text",
-                        "text": "This is a plain text section block.",
+                        "text": "Please set up meeting with client.",
                         "emoji": true
                     }
                 }
