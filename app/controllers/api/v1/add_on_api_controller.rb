@@ -39,7 +39,8 @@ class Api::V1::AddOnApiController < ApiController
             SlackApi.new.notif(@demo)
         else
             # Fail save
-            json_response({ message: "Failed to request for demo" }, :not_found)
+            json_response({ message: "Failed to request for demo or request has already in process" }, :not_found)
+            
         end
     end
 

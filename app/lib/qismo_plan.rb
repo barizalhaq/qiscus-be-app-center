@@ -12,9 +12,3 @@ QismoPlan = Struct.new(
 #     String subscription_type
 # end
 
-# QiscusChannel = Struct,new(
-#     :app_id,
-#     :app_code,
-#     :secret,
-#     :name
-# )

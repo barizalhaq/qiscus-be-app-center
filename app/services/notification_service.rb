@@ -1,0 +1,3 @@
+class GeneralService < ApplicationService
+    
+end

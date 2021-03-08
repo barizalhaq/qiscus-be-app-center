@@ -3,7 +3,6 @@ class Api::V1::AuthApiController < ApiController
 
     def authenticate
         command = AuthenticateUser.call(params[:app_code], params[:token])
-
         if command.success?
             render json: { 
                 data: {
