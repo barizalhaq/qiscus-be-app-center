@@ -30,10 +30,8 @@ class AuthenticateUser
       # update token
       existing.token = @token
       existing.save
-      byebug
       return app if app.secret
     else
-      byebug
       return app if app.secret && app.save
     end
 
