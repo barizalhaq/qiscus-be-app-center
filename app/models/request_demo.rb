@@ -4,9 +4,16 @@ class RequestDemo < ApplicationRecord
 
   validates :name, :presence => true
   validates :add_on, uniqueness: true
-  # { scope: :app_code,
-  #   message: "your request already in process" }
+
+  before_save :activate_add_on
 
   enum status: { request: 0, process: 1, approved: 2, cancel: 3 }
 
+  private
+  def activate_add_on
+    if status == "approved"
+      subscribe = Subscription.new(app: app, add_on: add_on)
+      subscribe.save
+    end
+  end
 end
