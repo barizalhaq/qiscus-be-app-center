@@ -7,12 +7,13 @@ ActiveAdmin.register AddOn do
   #
   permit_params :name, 
   :description, :author, :contact_email, :how_to_install, :caption, :icon, 
-  :icon_url, :webhook_url, :identifier, :setting_url
+  :icon_url, :webhook_url, :identifier, :setting_url, :published
   
   index do
     column :name
     column :author
     column :caption
+    column :published
     # column :icon
     # default_actions
     actions
@@ -32,6 +33,7 @@ ActiveAdmin.register AddOn do
       f.input :setting_url
       f.input :identifier
       # f.input :images
+      f.input :published
     end
     f.actions
   end
