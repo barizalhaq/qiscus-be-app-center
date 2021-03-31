@@ -19,4 +19,13 @@ ActiveAdmin.register Subscription do
     render('/admin/sidebar_links', :model => 'subscriptions')
   end
 
+  # index do
+  #   column :name
+  #   column :author
+  #   column :caption
+  #   # column :icon
+  #   # default_actions
+  #   actions
+  # end
+
 end

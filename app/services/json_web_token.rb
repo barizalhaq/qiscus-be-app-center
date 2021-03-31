@@ -1,8 +1,7 @@
 class JsonWebToken
-  def self.encode(payload, exp = 1.hours.from_now)
-    @key = ENV['API_SECRET_KEY']
-    payload[:exp] = exp.to_i
-    JWT.encode(payload, @key)
+  def self.encode(payload, secret = ENV['API_SECRET_KEY'])
+    payload[:exp] = 1.hours.from_now.to_i
+    JWT.encode(payload, secret)
   end
 
   def self.decode(token)

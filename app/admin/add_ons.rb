@@ -5,7 +5,9 @@ ActiveAdmin.register AddOn do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :author, :contact_email, :how_to_install, :caption, :icon, :icon_url
+  permit_params :name, 
+  :description, :author, :contact_email, :how_to_install, :caption, :icon, 
+  :icon_url, :webhook_url, :identifier, :setting_url
   
   index do
     column :name
@@ -26,6 +28,9 @@ ActiveAdmin.register AddOn do
       f.input :how_to_install, as: :quill_editor
       # f.input :icon, as: :file
       f.input :icon_url
+      f.input :webhook_url
+      f.input :setting_url
+      f.input :identifier
       # f.input :images
     end
     f.actions

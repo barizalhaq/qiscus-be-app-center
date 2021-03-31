@@ -10,6 +10,7 @@ class RequestDemo < ApplicationRecord
   enum status: { request: 0, process: 1, approved: 2, cancel: 3 }
 
   private
+  # TODO: refactor new subscription handle in controller
   def activate_add_on
     if status == "approved"
       subscribe = Subscription.new(app: app, add_on: add_on)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_22_045307) do
+ActiveRecord::Schema.define(version: 2021_03_31_052126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,9 @@ ActiveRecord::Schema.define(version: 2021_02_22_045307) do
     t.text "how_to_install"
     t.string "icon_url"
     t.string "caption"
+    t.string "webhook_url"
+    t.string "identifier"
+    t.string "setting_url"
   end
 
   create_table "admin_users", force: :cascade do |t|

@@ -1,5 +1,9 @@
+require "base64"
+
 class App < ApplicationRecord
     validates :app_code, uniqueness: true
+
+    has_many :subscriptions
     # validate :uniqueness_of_app_code
 
     # private
@@ -9,4 +13,18 @@ class App < ApplicationRecord
     #         errors.add(:app_code, "Record #{existing_record.id} already has the app code #{app_code}")
     #     end
     # end
+
+    def my_add_ons
+        instaled = Array.new
+        self.subscriptions.each do |a|
+            add_on = a.add_on
+            payload = { app_code: self.app_code }
+            # encode = JsonWebToken::encode(token: ":token", secret: add_on.identifier)
+            encode = JWT.encode payload, add_on.identifier, 'HS256'
+            add_on.setting_url = "#{add_on.setting_url}/#{encode}"
+            instaled.push(add_on)
+        end
+
+        return instaled
+    end
 end

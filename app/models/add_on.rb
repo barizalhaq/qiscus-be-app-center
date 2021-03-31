@@ -1,5 +1,5 @@
 class AddOn < ApplicationRecord
-
+    # dummy
     def images
         return [
             {

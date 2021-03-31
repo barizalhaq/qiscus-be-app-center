@@ -11,8 +11,8 @@ class Api::V1::AddOnApiController < ApiController
 
     # TODO : change with real data
     def my_add_on
-        @addons = AddOn.find(rand(1..AddOn.count))
-        res = AddOnBlueprint.render_as_json(@addons, root: :add_ons)
+        @addons = @current_app.my_add_ons
+        res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, view: :my_add_on)
         json_response(res)
         # render json: res
     end

@@ -15,4 +15,12 @@ ActiveAdmin.register RequestDemo do
   #   permitted
   # end
   
+  controller do
+    # This code is evaluated within the controller class
+
+    def define_a_method
+      # Instance method
+    end
+  end
+  
 end

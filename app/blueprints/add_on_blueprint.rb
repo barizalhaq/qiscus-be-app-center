@@ -6,4 +6,9 @@ class AddOnBlueprint < Blueprinter::Base
         fields :description, :how_to_install, :images
     end
 
+    view :my_add_on do
+        include_view :detail
+        field :setting_url
+    end
+
 end
