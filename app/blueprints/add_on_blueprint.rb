@@ -1,6 +1,6 @@
 class AddOnBlueprint < Blueprinter::Base
     identifier :id
-    fields :contact_email, :author, :caption, :name, :icon_url
+    fields :contact_email, :author, :caption, :name, :icon_url, :published
     
     view :detail do
         fields :description, :how_to_install, :images
