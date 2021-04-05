@@ -3,12 +3,14 @@ class AddOnBlueprint < Blueprinter::Base
     fields :contact_email, :author, :caption, :name, :icon_url
     
     view :detail do
-        fields :description, :how_to_install, :images
+        fields :description, :how_to_install, :images, :setting_url
+        field :installed do |add_on, options|
+            options[:installed].any? { |item| item[:id] == add_on.id }
+        end
     end
 
     view :my_add_on do
-        include_view :detail
-        field :setting_url
+        fields :images, :setting_url
     end
 
 end
