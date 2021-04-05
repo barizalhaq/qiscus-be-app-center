@@ -3,7 +3,7 @@ class Api::V1::AddOnApiController < ApiController
 
     # GET /add_on
     def index
-        @addons = AddOn.all
+        @addons = AddOn.where(published: true)
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons)
         json_response(res)
         # render json: res
