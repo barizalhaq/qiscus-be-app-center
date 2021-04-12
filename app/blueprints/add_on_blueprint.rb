@@ -5,7 +5,7 @@ class AddOnBlueprint < Blueprinter::Base
     view :detail do
         fields :description, :how_to_install, :images, :setting_url
         field :installed do |add_on, options|
-            options[:installed].any? { |item| item[:id] == add_on.id }
+            options[:installed].any? { |item| item[:add_on_id] == add_on.id }
         end
     end
 
