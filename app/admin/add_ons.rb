@@ -77,8 +77,7 @@ ActiveAdmin.register AddOn do
 
   member_action :delete_add_on_image, method: :delete do
     @img = ActiveStorage::Attachment.find(params[:id])
-    if @img.destroy
-      redirect_back(fallback_location: admin_add_ons_path)
-    end
+    @img.purge
+    redirect_back(fallback_location: admin_add_ons_path)
   end
 end
