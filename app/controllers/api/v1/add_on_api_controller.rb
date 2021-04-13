@@ -4,7 +4,7 @@ class Api::V1::AddOnApiController < ApiController
     # GET /add_on
     def index
         @addons = AddOn.where(published: true)
-        res = AddOnBlueprint.render_as_json(@addons, root: :add_ons)
+        res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
         json_response(res)
         # render json: res
     end
@@ -12,15 +12,14 @@ class Api::V1::AddOnApiController < ApiController
     # TODO : change with real data
     def my_add_on
         @addons = @current_app.my_add_ons
-        res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, view: :my_add_on)
+        res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, view: :my_add_on, current_app: @current_app)
         json_response(res)
         # render json: res
     end
 
-     # GET /add_ons/1 or /add_ons/1.json
+    # GET /add_ons/1 or /add_ons/1.json
     def show
-        installed_add_ons = @current_app.subscriptions
-        res = AddOnBlueprint.render_as_json(@addon, root: :add_on, view: :detail, installed: installed_add_ons)
+        res = AddOnBlueprint.render_as_json(@addon, root: :add_on, view: :detail, current_app: @current_app)
         json_response(res)
     end
 

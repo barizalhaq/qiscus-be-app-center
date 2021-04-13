@@ -1,5 +1,6 @@
 class AddOn < ApplicationRecord
     has_many_attached :images
+    has_many :request_demos
 
     validate :image_file
 
