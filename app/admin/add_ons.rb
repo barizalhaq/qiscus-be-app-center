@@ -5,7 +5,7 @@ ActiveAdmin.register AddOn do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, 
+  permit_params :name,
   :description, :author, :contact_email, :how_to_install, :caption, :icon, 
   :icon_url, :webhook_url, :identifier, :setting_url, :published, images: []
   
@@ -45,6 +45,7 @@ ActiveAdmin.register AddOn do
   end
 
   form :html => { :enctype => "multipart/form-data" } do |f|
+    f.semantic_errors *f.object.errors.keys
     f.inputs 'Add On' do
       f.input :name
       f.input :author
@@ -79,5 +80,18 @@ ActiveAdmin.register AddOn do
     @img = ActiveStorage::Attachment.find(params[:id])
     @img.purge
     redirect_back(fallback_location: admin_add_ons_path)
+  end
+
+  controller do
+    def create
+      @add_on = AddOn.new(permitted_params.required(:add_on))
+      @add_on.save!
+      redirect_to admin_add_on_path(@add_on.id)
+    end
+    def update
+      @add_on = AddOn.find(permitted_params[:id])
+      @add_on.update!(permitted_params.required(:add_on))
+      redirect_to admin_add_on_path(@add_on.id)
+    end
   end
 end
