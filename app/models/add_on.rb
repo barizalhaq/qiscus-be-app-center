@@ -1,15 +1,12 @@
 class AddOn < ApplicationRecord
-    # dummy
-    def images
-        return [
-            {
-                url: 'https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ',
-                caption: 'image 1'
-            },
-            {
-                url: 'https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ',
-                caption: 'image 1'
-            }
-        ]
+    has_many_attached :images
+
+    def getImages
+        return unless self.images.attachments
+        images = self.images.map do |image|
+            { name: image.blob.filename, image_url: image.service_url }
+        end
+
+        images
     end
 end
