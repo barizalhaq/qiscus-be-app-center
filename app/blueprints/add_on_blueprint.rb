@@ -17,7 +17,7 @@ class AddOnBlueprint < Blueprinter::Base
     end
 
     view :my_add_on do
-        fields :images, :setting_url
+        fields :setting_url
     end
 
 end
