@@ -3,7 +3,7 @@ class Api::V1::AddOnApiController < ApiController
 
     # GET /add_on
     def index
-        @addons = AddOn.where(published: true)
+        @addons = AddOn.where(published: true).where('name ILIKE ?', "%#{params[:name]}%")
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
         json_response(res)
         # render json: res
