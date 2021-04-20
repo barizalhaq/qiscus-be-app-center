@@ -3,10 +3,14 @@ class Api::V1::AddOnApiController < ApiController
 
     # GET /add_on
     def index
-        @addons = AddOn.where(published: true).where('name ILIKE ?', "%#{params[:name]}%")
+        @addons = AddOn.where(published: true)
+            .where('name ILIKE ?', "%#{params[:name]}%")
+            .page(params[:page] || 1).per(params[:per_page] || 5)
+            .order("name #{params[:sort]}")
+        set_pagination_headers
+
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
         json_response(res)
-        # render json: res
     end
 
     # TODO : change with real data
@@ -52,5 +56,25 @@ class Api::V1::AddOnApiController < ApiController
 
     def set_addon
         @addon = AddOn.find(params[:id])
+    end
+
+    # Pagination information headers
+    private
+    def set_pagination_headers
+        headers["X-TOTAL-COUNT"] = @addons.total_count
+        headers["X-PAGE"] = @addons.current_page
+        headers["X-LAST-PAGE"] = @addons.total_pages
+        links = []
+
+        links << page_link(1, "first") unless @addons.first_page?
+        links << page_link(@addons.prev_page, "prev") if @addons.prev_page
+        links << page_link(@addons.next_page, "next") if @addons.next_page
+        links << page_link(@addons.last_page, "last") unless @addons.last_page?
+
+        headers["Links"] = links.join(", ") if links.present?
+    end
+
+    def page_link(page, rel)
+        "<#{api_v1_add_on_url(request.query_parameters.merge(page: page))}>; rel='#{rel}'"
     end
 end

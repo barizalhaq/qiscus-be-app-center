@@ -68,3 +68,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # AWS S3 SDK
 gem 'aws-sdk-s3', '~> 1.89'
+
+# Pagination
+gem 'kaminari'
