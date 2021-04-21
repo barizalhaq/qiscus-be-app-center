@@ -69,7 +69,7 @@ class Api::V1::AddOnApiController < ApiController
         links << page_link(1, "first") unless @addons.first_page?
         links << page_link(@addons.prev_page, "prev") if @addons.prev_page
         links << page_link(@addons.next_page, "next") if @addons.next_page
-        links << page_link(@addons.last_page, "last") unless @addons.last_page?
+        links << page_link(@addons.total_pages, "last") unless @addons.last_page?
 
         headers["Links"] = links.join(", ") if links.present?
     end
