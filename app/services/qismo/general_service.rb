@@ -18,6 +18,10 @@ module Qismo
             qiscus = request.qiscus_channel
         end
 
+        def channel_name
+            qiscus = request.channel_name
+        end
+
         private
         def request
             req = QismoApi.new(@app_code, @token)

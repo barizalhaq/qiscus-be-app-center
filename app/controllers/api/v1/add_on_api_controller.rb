@@ -5,9 +5,12 @@ class Api::V1::AddOnApiController < ApiController
     def index
         @addons = AddOn.where(published: true)
             .where('name ILIKE ?', "%#{params[:name]}%")
-            .page(params[:page] || 1).per(params[:per_page] || 5)
             .order("name #{params[:sort]}")
-        set_pagination_headers
+
+        if params[:per_page].present?
+            @addons = @addons.page(params[:page] || 1).per(params[:per_page])
+            set_pagination_headers
+        end
 
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
         json_response(res)

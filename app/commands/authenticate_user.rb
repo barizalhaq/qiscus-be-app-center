@@ -23,7 +23,7 @@ class AuthenticateUser
     # else
     qismo_service = Qismo::GeneralService.new(@app_code, @token)
     qismo = qismo_service.qiscus_channel
-    app = App.new(app_code: qismo.app_code, token: @token, name: '', secret: qismo.secret)
+    app = App.new(app_code: qismo.app_code, token: @token, name: qismo_service.channel_name, secret: qismo.secret)
       
     existing = App.find_by_app_code(app_code)
     if existing 

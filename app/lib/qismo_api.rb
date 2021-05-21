@@ -33,6 +33,16 @@ class QismoApi
         end
     end
 
+    def channel_name
+        res = request.get("/api/v1/admin/get_profile")
+        if res.status == 200
+            body = JSON.parse(res.body)
+            data = body["data"]
+            return data["name"]
+        end
+        return nil
+    end
+
     private
     def request 
         conn = Faraday.new(

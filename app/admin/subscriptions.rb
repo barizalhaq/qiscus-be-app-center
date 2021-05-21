@@ -15,7 +15,7 @@ ActiveAdmin.register Subscription do
   #   permitted
   # end
   
-  sidebar "Subsription" do
+  sidebar "Subscription" do
     render('/admin/sidebar_links', :model => 'subscriptions')
   end
 
