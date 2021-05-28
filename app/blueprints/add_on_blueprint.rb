@@ -7,7 +7,6 @@ class AddOnBlueprint < Blueprinter::Base
     end
     field :icon_url do |add_on, options|
         add_on.icon.service_url unless !add_on.icon.attached?
-        ""
     end
 
     view :detail do
