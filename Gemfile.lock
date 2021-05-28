@@ -52,6 +52,8 @@ GEM
     active_admin_multi_upload (0.1.0)
       jquery-fileupload-rails (= 0.4.1)
       rails (>= 4.0.0)
+    active_storage_validations (0.9.3)
+      rails (>= 5.2.0)
     activeadmin_quill_editor (0.3.4)
       activeadmin (~> 2.0)
     activejob (5.2.5)
@@ -353,6 +355,7 @@ PLATFORMS
 DEPENDENCIES
   active_admin_flat_skin
   active_admin_multi_upload
+  active_storage_validations
   activeadmin!
   activeadmin_quill_editor
   aws-sdk-s3 (~> 1.89)

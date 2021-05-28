@@ -71,3 +71,5 @@ gem 'aws-sdk-s3', '~> 1.89'
 
 # Pagination
 gem 'kaminari'
+
+gem 'active_storage_validations'

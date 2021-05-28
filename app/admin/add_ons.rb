@@ -7,7 +7,7 @@ ActiveAdmin.register AddOn do
   #
   permit_params :name,
   :description, :author, :contact_email, :how_to_install, :caption, :icon, 
-  :icon_url, :webhook_url, :identifier, :setting_url, :published, images: []
+  :webhook_url, :identifier, :setting_url, :published, images: []
   
   index do
     column :name
@@ -25,17 +25,24 @@ ActiveAdmin.register AddOn do
       row :caption
       row :description
       row :how_to_install
-      row :icon_url
+      row "ICON" do |add_on|
+        if add_on.icon.attached?
+          img src: add_on.icon.service_url, style: "max-height: 500px; max-width: 500px;", alt: add_on.icon.blob.filename
+          figcaption add_on.icon.blob.filename
+        end
+      end
       row :webhook_url
       row :setting_url
       row :identifier
       row :published
       row "IMAGES" do |add_on|
-        ul do
-          add_on.images.each do |img|
-            li do
-                img src: img.service_url, style: "max-height: 500px; max-width: 500px;", alt: img.blob.filename
-                figcaption img.blob.filename
+        if add_on.images.attached?
+          ul do
+            add_on.images.each do |img|
+              li do
+                  img src: img.service_url, style: "max-height: 500px; max-width: 500px;", alt: img.blob.filename
+                  figcaption img.blob.filename
+              end
             end
           end
         end
@@ -45,15 +52,23 @@ ActiveAdmin.register AddOn do
   end
 
   form :html => { :enctype => "multipart/form-data" } do |f|
-    f.semantic_errors *f.object.errors.keys
     f.inputs 'Add On' do
+      f.semantic_errors *f.object.errors.keys
       f.input :name
       f.input :author
       f.input :contact_email
       f.input :caption
       f.input :description, as: :quill_editor
       f.input :how_to_install, as: :quill_editor
-      f.input :icon_url
+      if f.add_on.icon.attached?
+        figure do
+          img src: f.add_on.icon.service_url, style: "max-height: 500px; max-width: 500px;", alt: f.add_on.icon.blob.filename
+          figcaption f.add_on.icon.blob.filename
+          a "Delete", href: delete_add_on_icon_admin_add_on_path(f.add_on.icon.id), "data-method": :delete, "data-confirm": "Are you sure want to delete this icon?"
+        end
+      else
+        f.input :icon, as: :file
+      end
       f.input :webhook_url
       f.input :setting_url
       f.input :identifier
@@ -82,16 +97,9 @@ ActiveAdmin.register AddOn do
     redirect_back(fallback_location: admin_add_ons_path)
   end
 
-  controller do
-    def create
-      @add_on = AddOn.new(permitted_params.required(:add_on))
-      @add_on.save!
-      redirect_to admin_add_on_path(@add_on.id)
-    end
-    def update
-      @add_on = AddOn.find(permitted_params[:id])
-      @add_on.update!(permitted_params.required(:add_on))
-      redirect_to admin_add_on_path(@add_on.id)
-    end
+  member_action :delete_add_on_icon, method: :delete do
+    @icon = ActiveStorage::Attachment.find(params[:id])
+    @icon.purge
+    redirect_back(fallback_location: admin_add_ons_path)
   end
 end

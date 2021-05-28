@@ -3,11 +3,14 @@ require 'json'
 
 class AddOn < ApplicationRecord
     has_many_attached :images
+    has_one_attached :icon
     has_many :request_demos
 
-    validate :image_file
     validates :name, :author, :contact_email, :caption, :description,
-        :how_to_install, :icon_url, :webhook_url, :setting_url, :identifier, presence: true
+        :how_to_install, :webhook_url, :identifier, :icon, presence: true
+
+    validates :images, content_type: [:png, :jpg, :jpeg]
+    validates :icon, attached: true, content_type: [:png, :jpg, :jpeg]
 
     def getImages
         return unless self.images.attachments
@@ -16,14 +19,6 @@ class AddOn < ApplicationRecord
         end
 
         images
-    end
-
-    def image_file
-        images.each do |img|
-            if !img.content_type.in?(%w(image/png image/jpg image/jpeg image/svg))
-                errors[:images] << "Must be an image format (png/jpg/jpeg/svg)"
-            end
-        end
     end
 
     def request_webhook(app)
