@@ -9,11 +9,11 @@ class Api::V1::AddOnApiController < ApiController
 
         if params[:per_page].present?
             @addons = @addons.page(params[:page] || 1).per(params[:per_page])
-            set_pagination_headers
         end
 
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
-        json_response(res)
+
+        json_response(pagination_meta(res))
     end
 
     # TODO : change with real data
@@ -21,7 +21,6 @@ class Api::V1::AddOnApiController < ApiController
         @addons = @current_app.my_add_ons
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, view: :my_add_on, current_app: @current_app)
         json_response(res)
-        # render json: res
     end
 
     # GET /add_ons/1 or /add_ons/1.json
@@ -63,21 +62,28 @@ class Api::V1::AddOnApiController < ApiController
 
     # Pagination information headers
     private
-    def set_pagination_headers
-        headers["X-TOTAL-COUNT"] = @addons.total_count
-        headers["X-PAGE"] = @addons.current_page
-        headers["X-LAST-PAGE"] = @addons.total_pages
-        links = []
+    def pagination_meta(res)
+        begin
+            links = {}
+            links["first_page"] = page_link(1) unless @addons.first_page?
+            links["next_page"] = page_link(@addons.next_page) if @addons.next_page
+            links["prev_page"] = page_link(@addons.next_page) if @addons.next_page
+            links["last_page"] = page_link(@addons.total_pages) unless @addons.last_page?
 
-        links << page_link(1, "first") unless @addons.first_page?
-        links << page_link(@addons.prev_page, "prev") if @addons.prev_page
-        links << page_link(@addons.next_page, "next") if @addons.next_page
-        links << page_link(@addons.total_pages, "last") unless @addons.last_page?
+            res["meta"] = {
+                "total_count": @addons.total_count,
+                "current_page": @addons.current_page,
+                "last_page": @addons.total_pages,
+                "links": links
+            }
+        rescue
+            return res
+        end
 
-        headers["Links"] = links.join(", ") if links.present?
+        return res
     end
 
-    def page_link(page, rel)
-        "<#{api_v1_add_on_url(request.query_parameters.merge(page: page))}>; rel='#{rel}'"
+    def page_link(page)
+        "#{api_v1_add_on_url(request.query_parameters.merge(page: page))}"
     end
 end
