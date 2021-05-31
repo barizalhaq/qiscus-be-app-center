@@ -7,7 +7,7 @@ class AddOn < ApplicationRecord
     has_many :request_demos
 
     validates :name, :author, :contact_email, :caption, :description,
-        :how_to_install, :webhook_url, :identifier, :icon, presence: true
+        :webhook_url, :identifier, :icon, presence: true
 
     validates :images, content_type: [:png, :jpg, :jpeg]
     validates :icon, attached: true, content_type: [:png, :jpg, :jpeg]
