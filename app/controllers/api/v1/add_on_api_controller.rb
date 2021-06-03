@@ -11,6 +11,10 @@ class Api::V1::AddOnApiController < ApiController
             @addons = @addons.page(params[:page] || 1).per(params[:per_page])
         end
 
+        if  params[:category].present?
+            @addons = @addons.joins(:category).where('name ILIKE ?',"%#{params[:category]}%")
+        end
+
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
 
         json_response(pagination_meta(res))

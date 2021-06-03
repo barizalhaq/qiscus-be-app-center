@@ -8,6 +8,7 @@ class AddOnBlueprint < Blueprinter::Base
     field :icon_url do |add_on, options|
         add_on.icon.service_url unless !add_on.icon.attached?
     end
+    association :category, blueprint: CategoryBlueprint
 
     view :detail do
         fields :description, :how_to_install

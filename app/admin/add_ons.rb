@@ -5,7 +5,7 @@ ActiveAdmin.register AddOn do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name,
+  permit_params :name, :category_id,
   :description, :author, :contact_email, :how_to_install, :caption, :icon, 
   :webhook_url, :identifier, :setting_url, :published, images: []
   
@@ -20,6 +20,9 @@ ActiveAdmin.register AddOn do
   show do
     attributes_table do
       row :name
+      row "Category" do |add_on|
+        add_on.category.title unless !add_on.category.present?
+      end
       row :author
       row :contact_email
       row :caption
@@ -55,6 +58,7 @@ ActiveAdmin.register AddOn do
     f.inputs 'Add On' do
       f.semantic_errors *f.object.errors.keys
       f.input :name
+      f.input :category_id, :as => :select, :collection => Category.all.collect {|category| [category.title, category.id] }
       f.input :author
       f.input :contact_email
       f.input :caption

@@ -5,6 +5,7 @@ class AddOn < ApplicationRecord
     has_many_attached :images
     has_one_attached :icon
     has_many :request_demos
+    belongs_to :category
 
     validates :name, :author, :contact_email, :caption, :description,
         :identifier, :icon, presence: true
