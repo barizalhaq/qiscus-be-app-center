@@ -11,6 +11,7 @@ ActiveAdmin.register AddOn do
   
   index do
     column :name
+    column :category
     column :author
     column :caption
     column :published

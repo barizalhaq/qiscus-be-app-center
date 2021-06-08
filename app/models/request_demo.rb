@@ -3,7 +3,6 @@ class RequestDemo < ApplicationRecord
   belongs_to :add_on
 
   validates :name, :presence => true
-  validates :add_on, uniqueness: true
   validates :add_on, uniqueness: {:scope => [:add_on_id, :app_id]}
 
   before_save :activate_add_on

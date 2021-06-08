@@ -39,9 +39,28 @@ class Api::V1::AddOnApiController < ApiController
     end
 
     def contact_us
-        @demo = RequestDemo.new(name: params[:name], reason: params[:description], contact_email: params[:contact_email], contact_phone: params[:contact_phone], status: 0)
-        @demo.add_on = @addon
-        @demo.app = @current_app
+        demoExist = RequestDemo.where("add_on_id = ?", @addon.id)
+            .where("app_id = ?", @current_app.id)
+            .where("status = ?", 3)
+            .present?
+
+        if demoExist
+            @demo = RequestDemo.where("add_on_id = ?", @addon.id)
+                .where("app_id = ?", @current_app.id)
+                .first
+
+            @demo.name = params[:name]
+            @demo.reason = params[:reason]
+            @demo.reason = params[:description]
+            @demo.contact_email = params[:contact_email]
+            @demo.contact_phone = params[:contact_phone]
+            @demo.status = 0
+        else
+            @demo = RequestDemo.new(name: params[:name], reason: params[:description], contact_email: params[:contact_email], contact_phone: params[:contact_phone], status: 0)
+            @demo.add_on = @addon
+            @demo.app = @current_app
+        end
+
         if @demo.save
             res = RequestDemoBlueprint.render_as_json(@demo, root: :request_demo)
             json_response(res)
