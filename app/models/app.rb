@@ -19,9 +19,8 @@ class App < ApplicationRecord
         self.subscriptions.each do |a|
             add_on = a.add_on
             payload = { app_code: self.app_code }
-            # encode = JsonWebToken::encode(token: ":token", secret: add_on.identifier)
             encode = JWT.encode payload, add_on.identifier, 'HS256'
-            add_on.setting_url = "#{add_on.setting_url}/#{encode}"
+            add_on.setting_url = "#{add_on.setting_url}/#{encode}" unless add_on.setting_url.to_s.strip.empty?
             instaled.push(add_on)
         end
 

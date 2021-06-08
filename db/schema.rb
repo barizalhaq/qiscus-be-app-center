@@ -87,19 +87,10 @@ ActiveRecord::Schema.define(version: 2021_06_03_035241) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "admin_email"
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string "url", limit: 500
-    t.bigint "imageable_id"
-    t.string "imageable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
