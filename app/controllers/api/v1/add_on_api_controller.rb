@@ -12,7 +12,7 @@ class Api::V1::AddOnApiController < ApiController
         end
 
         if  params[:category].present?
-            @addons = @addons.joins(:category).where('name ILIKE ?',"%#{params[:category]}%")
+            @addons = @addons.joins(:category).where('title ILIKE ?',"%#{params[:category]}%")
         end
 
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
