@@ -19,5 +19,7 @@ module Marketplace
       #{config.root}/app/services
     ]
 
+    config.middleware.use DomainProxy
+
   end
 end
