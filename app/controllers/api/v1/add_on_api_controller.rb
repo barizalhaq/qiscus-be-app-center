@@ -61,6 +61,10 @@ class Api::V1::AddOnApiController < ApiController
             @demo.app = @current_app
         end
 
+        unless @demo.valid?
+            return render json: @demo.errors, status: 422
+        end
+
         if @demo.save
             res = RequestDemoBlueprint.render_as_json(@demo, root: :request_demo)
             json_response(res)
