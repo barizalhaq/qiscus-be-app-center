@@ -31,7 +31,7 @@ ActiveAdmin.register AddOn do
       row :how_to_install
       row "ICON" do |add_on|
         if add_on.icon.attached?
-          img src: add_on.icon.service_url, style: "max-height: 500px; max-width: 500px;", alt: add_on.icon.blob.filename
+          img src: add_on.icon.url, style: "max-height: 500px; max-width: 500px;", alt: add_on.icon.blob.filename
           figcaption add_on.icon.blob.filename
         end
       end
@@ -44,7 +44,7 @@ ActiveAdmin.register AddOn do
           ul do
             add_on.images.each do |img|
               li do
-                  img src: img.service_url, style: "max-height: 500px; max-width: 500px;", alt: img.blob.filename
+                  img src: img.url, style: "max-height: 500px; max-width: 500px;", alt: img.blob.filename
                   figcaption img.blob.filename
               end
             end
@@ -65,9 +65,9 @@ ActiveAdmin.register AddOn do
       f.input :caption
       f.input :description, as: :quill_editor
       f.input :how_to_install, as: :quill_editor
-      if f.add_on.icon.attached?
+      if f.add_on.icon.attached? && f.add_on.icon.persisted?
         figure do
-          img src: f.add_on.icon.service_url, style: "max-height: 500px; max-width: 500px;", alt: f.add_on.icon.blob.filename
+          img src: f.add_on.icon.url, style: "max-height: 500px; max-width: 500px;", alt: f.add_on.icon.blob.filename
           figcaption f.add_on.icon.blob.filename
           a "Delete", href: delete_add_on_icon_admin_add_on_path(f.add_on.icon.id), "data-method": :delete, "data-confirm": "Are you sure want to delete this icon?"
         end
@@ -83,11 +83,11 @@ ActiveAdmin.register AddOn do
           f.add_on.images.each do |img|
             li do
               figure do
-                img src: img.service_url, style: "max-height: 500px; max-width: 500px;", alt: img.blob.filename
+                img src: img.url, style: "max-height: 500px; max-width: 500px;", alt: img.blob.filename
                 figcaption img.blob.filename
                 a "Delete", href: delete_add_on_image_admin_add_on_path(img.id), "data-method": :delete, "data-confirm": "Are you sure want to delete this image?"
               end
-            end
+            end unless !img.persisted?
           end
         end
       end

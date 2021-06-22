@@ -6,7 +6,7 @@ class AddOnBlueprint < Blueprinter::Base
         demo.status unless demo == nil
     end
     field :icon_url do |add_on, options|
-        add_on.icon.service_url unless !add_on.icon.attached?
+        add_on.icon.url unless !add_on.icon.attached? && !add_on.icon.persisted?
     end
     association :category, blueprint: CategoryBlueprint
 

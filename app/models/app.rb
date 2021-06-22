@@ -3,6 +3,8 @@ require "base64"
 class App < ApplicationRecord
     validates :app_code, uniqueness: true
 
+    validates :app_code, :token, :secret, :name, presence: true
+
     has_many :subscriptions
     # validate :uniqueness_of_app_code
 

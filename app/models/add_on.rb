@@ -7,16 +7,25 @@ class AddOn < ApplicationRecord
     has_many :request_demos
     belongs_to :category
 
+    validates :name, uniqueness: true
+
     validates :name, :author, :contact_email, :caption, :description,
         :identifier, :icon, presence: true
 
-    validates :images, content_type: [:png, :jpg, :jpeg]
-    validates :icon, attached: true, content_type: [:png, :jpg, :jpeg]
+    validates :images, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..2.megabytes }
+    validates :icon, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..2.megabytes }
+
+    validates :name, :author, :caption, length: { minimum: 3, maximum: 255 }
+    validates :name, :author, :caption, format: { with: /\A([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+\z/ }
+
+    validates :description, length: { minimum: 3 }
+
+    validates :contact_email, email: true
 
     def getImages
         return unless self.images.attachments
         images = self.images.map do |image|
-            { name: image.blob.filename, image_url: image.service_url }
+            { name: image.blob.filename, image_url: image.url }
         end
 
         images
