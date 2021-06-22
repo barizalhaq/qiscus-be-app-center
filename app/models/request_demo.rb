@@ -5,9 +5,9 @@ class RequestDemo < ApplicationRecord
   validates :name, :reason, :contact_email, :contact_phone, :presence => true
   validates :add_on, uniqueness: {:scope => [:add_on_id, :app_id]}
 
-  validates :contact_phone, numericality: true
+  validates :contact_phone, telephone_number: { country: :id, types: [:fixed_line, :mobile] }
 
-  validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP } 
+  validates :contact_email, email: true
 
   before_save :activate_add_on
 
