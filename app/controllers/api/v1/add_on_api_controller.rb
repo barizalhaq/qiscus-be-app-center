@@ -5,7 +5,7 @@ class Api::V1::AddOnApiController < ApiController
     def index
         @addons = AddOn.where(published: true)
             .where('name ILIKE ?', "%#{params[:name]}%")
-            .order("name #{params[:sort]}")
+            .order("name #{params[:sort].present? ? params[:sort] : "asc"}")
 
         if params[:per_page].present?
             @addons = @addons.page(params[:page] || 1).per(params[:per_page])
