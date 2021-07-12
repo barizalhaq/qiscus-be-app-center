@@ -7,6 +7,6 @@ class Subscription < ApplicationRecord
   after_save :add_on_request_webhook
 
   def add_on_request_webhook
-    puts self.add_on.request_webhook(self.app) if !self.add_on.setting_url.to_s.strip.empty?
+    self.add_on.request_webhook(self.app) unless self.add_on.webhook_url.to_s.strip.empty?
   end
 end
