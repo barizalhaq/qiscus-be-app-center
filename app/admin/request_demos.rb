@@ -14,13 +14,27 @@ ActiveAdmin.register RequestDemo do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  actions :all, except: [:new]
   
   controller do
-    # This code is evaluated within the controller class
 
-    def define_a_method
-      # Instance method
+    def show
+      begin
+        @request_demo = RequestDemo.find(params[:id])
+
+        respond_to do |format|
+          format.html { render :show }
+        end
+      rescue ActiveRecord::RecordNotFound
+        respond_to do |format|
+          format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
+          format.xml  { head :not_found }
+          format.any  { head :not_found }
+        end
+      end
     end
+
   end
   
 end

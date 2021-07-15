@@ -14,6 +14,8 @@ ActiveAdmin.register Subscription do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  actions :all, except: [:new]
   
   sidebar "Subscription" do
     render('/admin/sidebar_links', :model => 'subscriptions')
@@ -27,5 +29,22 @@ ActiveAdmin.register Subscription do
   #   # default_actions
   #   actions
   # end
+
+  controller do
+    def show
+      begin
+        @subscription = Subscription.find(params[:id])
+        respond_to do |format|
+          format.html { render :show }
+        end
+      rescue ActiveRecord::RecordNotFound
+        respond_to do |format|
+          format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
+          format.xml  { head :not_found }
+          format.any  { head :not_found }
+        end
+      end
+    end
+  end
 
 end
