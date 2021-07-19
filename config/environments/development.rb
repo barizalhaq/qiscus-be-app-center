@@ -81,7 +81,7 @@ Rails.application.configure do
     config.enabled = true
   
     # You can assign a different logger or method to call on that logger
-    config.logger = Rails.logger
+    config.logger = Logger.new($stdout)
     config.logger_method = :log
   
     # I really wouldn't change this...
@@ -90,7 +90,7 @@ Rails.application.configure do
     # Tweak which parts of the HTTP cycle to log...
     config.log_connect   = true
     config.log_request   = true
-    config.log_headers   = false
+    config.log_headers   = true
     config.log_data      = true
     config.log_status    = true
     config.log_response  = true
