@@ -1,5 +1,5 @@
 module Qismo
-    class CciService < ApplicationService
+    class Cci::CciService < ApplicationService
         def initialize(demo)
             @contact_us = demo
             @token = @contact_us.app.token
