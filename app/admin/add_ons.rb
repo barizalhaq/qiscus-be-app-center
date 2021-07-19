@@ -59,7 +59,7 @@ ActiveAdmin.register AddOn do
     f.inputs 'Add On' do
       f.semantic_errors *f.object.errors.keys
       f.input :name
-      f.input :category_id, :as => :select, :collection => Category.all.collect {|category| [category.title, category.id] }
+      f.input :category_id, :as => :select, :collection => Category.all.collect { |category| [category.title, category.id] }
       f.input :author
       f.input :contact_email
       f.input :caption

@@ -15,7 +15,7 @@ ActiveAdmin.register Subscription do
   #   permitted
   # end
 
-  actions :all, except: [:new]
+  actions :all, except: [:new, :edit, :update]
   
   sidebar "Subscription" do
     render('/admin/sidebar_links', :model => 'subscriptions')
