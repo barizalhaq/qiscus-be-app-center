@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Request Demos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>App</th>
+      <th>Add on</th>
+      <th>Contact email</th>
+      <th>Contact phone</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @request_demos.each do |request_demo| %>
+      <tr>
+        <td><%= request_demo.app %></td>
+        <td><%= request_demo.add_on %></td>
+        <td><%= request_demo.contact_email %></td>
+        <td><%= request_demo.contact_phone %></td>
+        <td><%= link_to 'Show', request_demo %></td>
+        <td><%= link_to 'Edit', edit_request_demo_path(request_demo) %></td>
+        <td><%= link_to 'Destroy', request_demo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Request Demo', new_request_demo_path %>
