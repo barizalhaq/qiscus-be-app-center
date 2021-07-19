@@ -51,7 +51,7 @@ Rails.application.configure do
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
@@ -89,12 +89,13 @@ Rails.application.configure do
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
+  logger = ActiveSupport::Logger.new("#{Rails.root}/log/#{Time.now.strftime("%m-%d-%y")}-production.log", 'daily')
+
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new("#{Rails.root}/log/#{Time.now.strftime("%m-%d-%y")}-production.log", 'daily')
-    logger.formatter = config.log_formatter
-    config.logger    = logger
-    config.log_level = :info
+    logger           = ActiveSupport::Logger.new($stdout)
   end
+  logger.formatter = config.log_formatter
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
