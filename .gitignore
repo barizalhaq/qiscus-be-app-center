@@ -10,7 +10,7 @@
 # Ignore all logfiles and tempfiles.
 /logs/*
 /tmp/*
-!/logs/outbound/.keep
+!/logs/**/.keep
 !/tmp/.keep
 
 # Ignore uploaded files in development
