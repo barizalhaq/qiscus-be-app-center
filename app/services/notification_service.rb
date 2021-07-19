@@ -1,3 +1,0 @@
-class GeneralService < ApplicationService
-    
-end
