@@ -8,9 +8,9 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/logs/*
+/log/*
 /tmp/*
-!/logs/**/.keep
+!/logs/.keep
 !/tmp/.keep
 
 # Ignore uploaded files in development

@@ -1,7 +1,7 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.logger = Logger.new("#{Rails.root}/logs/inbound/#{Time.now.strftime("%m-%d-%y")}-development.log", 'daily')
+  config.logger = Logger.new("#{Rails.root}/log/#{Time.now.strftime("%m-%d-%y")}-development.log", 'daily')
   
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -81,11 +81,11 @@ Rails.application.configure do
     config.enabled = true
   
     # You can assign a different logger or method to call on that logger
-    config.logger = Logger.new("#{Rails.root}/logs/outbound/#{Time.now.strftime("%m-%d-%y")}-development.log.log", 'daily')
+    config.logger = Rails.logger
     config.logger_method = :log
   
     # I really wouldn't change this...
-    config.severity = Logger::Severity::DEBUG
+    config.severity = Logger::Severity::INFO
   
     # Tweak which parts of the HTTP cycle to log...
     config.log_connect   = true
