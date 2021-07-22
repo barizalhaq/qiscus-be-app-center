@@ -22,9 +22,11 @@ class Api::V1::AddOnApiController < ApiController
 
     # TODO : change with real data
     def my_add_on
-        @addons = @current_app.my_add_ons
+        @addons = @current_app.my_add_ons status: params[:status],
+            category: params[:category], sort: params[:sort_by],
+            name: params[:name], per_page: params[:per_page], page: params[:page]
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, view: :my_add_on, current_app: @current_app)
-        json_response(res)
+        json_response(pagination_meta(res))
     end
 
     # GET /add_ons/1 or /add_ons/1.json
