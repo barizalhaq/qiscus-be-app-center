@@ -10,8 +10,8 @@ class Api::V1::AddOnApiController < ApiController
         if  params[:category].present?
             @addons = @addons.joins(:category).where('title ILIKE ?',"%#{params[:category]}%")
         end
-        
-        @addons = @addons.map { |demo| demo unless demo.request_demos.where(app_id: @current_app.id, status: :request).exists? }
+
+        @addons = @addons.select { |demo| demo unless demo.request_demos.where(app_id: @current_app.id, status: :request).exists? }
 
         if params[:per_page].present?
             if @addons.instance_of? Array
