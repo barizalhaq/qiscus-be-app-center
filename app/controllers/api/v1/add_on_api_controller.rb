@@ -4,15 +4,21 @@ class Api::V1::AddOnApiController < ApiController
     # GET /add_on
     def index
         @addons = AddOn.where(published: true)
-            .where('name ILIKE ?', "%#{params[:name]}%")
-            .order("name #{params[:sort].present? ? params[:sort] : "asc"}")
-
-        if params[:per_page].present?
-            @addons = @addons.page(params[:page] || 1).per(params[:per_page])
-        end
+            .where('add_ons.name ILIKE ?', "%#{params[:name]}%")
+            .order("add_ons.name #{params[:sort].present? ? params[:sort] : "asc"}")
 
         if  params[:category].present?
             @addons = @addons.joins(:category).where('title ILIKE ?',"%#{params[:category]}%")
+        end
+        
+        @addons = @addons.map { |demo| demo unless demo.request_demos.where(app_id: @current_app.id, status: :request).exists? }
+
+        if params[:per_page].present?
+            if @addons.instance_of? Array
+                @addons = Kaminari.paginate_array(@addons).page(params[:page] || 1).per(params[:per_page])
+            else
+                @addons = @addons.page(params[:page] || 1).per(params[:per_page])
+            end
         end
 
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
