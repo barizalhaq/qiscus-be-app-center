@@ -2,8 +2,13 @@ class AddOnBlueprint < Blueprinter::Base
     identifier :id
     fields :contact_email, :author, :caption, :name
     field :status do |add_on, options|
-        demo = add_on.request_demos.find { |demo| demo.app_id == options[:current_app].id }
-        demo.status unless demo == nil
+        installed = options[:current_app].subscriptions.find { |subscription| subscription.add_on_id == add_on.id }
+        if installed
+            :approved
+        else
+            demo = add_on.request_demos.find { |demo| demo.app_id == options[:current_app].id }
+            demo.status unless demo == nil
+        end
     end
     field :icon_url do |add_on, options|
         add_on.icon.url unless !add_on.icon.attached? && !add_on.icon.persisted?
