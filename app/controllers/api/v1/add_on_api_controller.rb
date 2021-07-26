@@ -3,7 +3,11 @@ class Api::V1::AddOnApiController < ApiController
 
     # GET /add_on
     def index
-        @addons = AddOn.where(published: true)
+        demos           = RequestDemo.where(app_id: @current_app.id, status: [:request, :process, :approved]).pluck(:add_on_id)
+        subscriptions   = Subscription.where(app_id: @current_app.id).pluck(:add_on_id)
+
+        @addons = AddOn.where.not(id: [*demos, *subscriptions].uniq)
+            .where(published: true)
             .where('add_ons.name ILIKE ?', "%#{params[:name]}%")
             .order("add_ons.name #{params[:sort].present? ? params[:sort] : "asc"}")
 
@@ -11,14 +15,8 @@ class Api::V1::AddOnApiController < ApiController
             @addons = @addons.joins(:category).where('title ILIKE ?',"%#{params[:category]}%")
         end
 
-        @addons = @addons.select { |demo| demo unless demo.request_demos.where(app_id: @current_app.id, status: :request).exists? }
-
         if params[:per_page].present?
-            if @addons.instance_of? Array
-                @addons = Kaminari.paginate_array(@addons).page(params[:page] || 1).per(params[:per_page])
-            else
-                @addons = @addons.page(params[:page] || 1).per(params[:per_page])
-            end
+            @addons = @addons.page(params[:page] || 1).per(params[:per_page])
         end
 
         res = AddOnBlueprint.render_as_json(@addons, root: :add_ons, current_app: @current_app)
