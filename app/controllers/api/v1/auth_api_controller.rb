@@ -23,7 +23,7 @@ class Api::V1::AuthApiController < ApiController
         plan = service.check_plan
 
         render json: { message: :unauthorized, status: 401 },
-            status: :unauthorized unless plan.name.match(/Marketplace/) && plan.subscription_status == :active
+            status: :unauthorized if !plan.name.match(/Marketplace/) && plan.subscription_status != :active
     end
 
 end
