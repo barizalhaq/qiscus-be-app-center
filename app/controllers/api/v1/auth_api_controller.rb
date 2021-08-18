@@ -20,10 +20,9 @@ class Api::V1::AuthApiController < ApiController
 
     def is_eligible
         service = Qismo::GeneralService.new(params[:app_code], params[:token])
-        plan = service.check_plan
 
         render json: { message: :unauthorized, status: 401 },
-            status: :unauthorized if !plan.name.match(/Marketplace/) && plan.subscription_status != :active
+            status: :unauthorized unless service.is_eligible_for_marketplace?
     end
 
 end

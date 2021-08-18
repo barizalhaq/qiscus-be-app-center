@@ -9,13 +9,12 @@ class QismoApi
         @qismo_token = token
     end
 
-    def check_plan
-        res = request.get('api/v1/admin/my_plan')
+    def features
+        res = request.get('api/v2/features')
         if res.status == 200
             body = JSON.parse(res.body)
             data = body['data']
-            plan = QismoPlan.new data['name'], data['subscription_date'], data['subscription_status'], data['subscription_type']
-            return plan
+            return data['features']
         else
             return nil
         end

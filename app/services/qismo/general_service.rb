@@ -6,8 +6,12 @@ module Qismo
             @token = token
         end
 
-        def check_plan()
-            plan = request.check_plan
+        def is_eligible_for_marketplace?()
+            features = request.features
+
+            marketplace_f = features.select { |feature| feature['caption'] == 'Marketplace' }
+
+            marketplace_f[0]['status'] === 1
         end
 
         def list_plan
