@@ -37,7 +37,7 @@ class AddOn < ApplicationRecord
             :app_code => app.app_code,
             :app_secret => app.secret,
             :app_name => app.name,
-            :admin_email => "#{app.app_code}_admin@qiscus.com",
+            :admin_email => "#{app.app_code}_admin@qismo.com",
             :admin_token => app.token
         }
         res = Faraday.post(url) do |req|
