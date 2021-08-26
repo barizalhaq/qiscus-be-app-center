@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'login', to: 'auth_api#authenticate'
+      post 'app/onboard', to: 'app#onboard_finished'
 
       get 'add_on', to: 'add_on_api#index'
       get 'my_add_on', to: 'add_on_api#my_add_on'
