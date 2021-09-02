@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_022042) do
+ActiveRecord::Schema.define(version: 2021_09_02_022856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 2021_08_26_022042) do
     t.string "setting_url"
     t.boolean "published", default: false
     t.bigint "category_id"
+    t.string "description_video_url"
+    t.string "how_to_install_video_url"
     t.index ["category_id"], name: "index_add_ons_on_category_id"
   end
 

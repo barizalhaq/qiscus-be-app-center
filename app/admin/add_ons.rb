@@ -7,7 +7,7 @@ ActiveAdmin.register AddOn do
   #
   permit_params :name, :category_id,
   :description, :author, :contact_email, :how_to_install, :caption, :icon, 
-  :webhook_url, :identifier, :setting_url, :published, images: []
+  :webhook_url, :identifier, :setting_url, :published, :description_video_url, :how_to_install_video_url, images: []
   
   index do
     column :name
@@ -28,7 +28,9 @@ ActiveAdmin.register AddOn do
       row :contact_email
       row :caption
       row :description
+      row :description_video_url
       row :how_to_install
+      row :how_to_install_video_url
       row "ICON" do |add_on|
         if add_on.icon.attached?
           img src: add_on.icon.url, style: "max-height: 500px; max-width: 500px;", alt: add_on.icon.blob.filename
@@ -64,7 +66,9 @@ ActiveAdmin.register AddOn do
       f.input :contact_email
       f.input :caption
       f.input :description, as: :quill_editor
+      f.input :description_video_url
       f.input :how_to_install, as: :quill_editor
+      f.input :how_to_install_video_url
       if f.add_on.icon.attached? && f.add_on.icon.persisted?
         figure do
           img src: f.add_on.icon.url, style: "max-height: 500px; max-width: 500px;", alt: f.add_on.icon.blob.filename

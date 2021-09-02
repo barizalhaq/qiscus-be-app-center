@@ -16,7 +16,7 @@ class AddOnBlueprint < Blueprinter::Base
     association :category, blueprint: CategoryBlueprint
 
     view :detail do
-        fields :description, :how_to_install
+        fields :description, :how_to_install, :description_video_url, :how_to_install_video_url
         field :setting_url do |add_on, options|
             add_on.setting_url unless !add_on.setting_url.to_s.strip.empty?
         end
