@@ -33,7 +33,7 @@ class AuthenticateUser
       # update token
       existing.token = @token
       existing.save
-      return app if app.secret
+      return existing if app.secret
     else
       return app if app.secret && app.save
     end
